@@ -8,7 +8,7 @@ database_name = 'diagnostic'
 
 class BaseConfig:
     """Base configuration."""
-    SECRET_KEY = os.getenv('SECRET_KEY', 'diagnostic_secret')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'diagnostic_secret123')
     DEBUG = False
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -32,6 +32,6 @@ class TestingConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     """Production configuration."""
-    SECRET_KEY = 'diagnostic_secret'
+    SECRET_KEY = 'diagnostic_secret123'
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///diagnostic'

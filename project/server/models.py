@@ -22,6 +22,10 @@ class User(db.Model):
         self.registered_on = datetime.datetime.now()
         self.admin = admin
 
+    @property
+    def serialize(self):
+        return {'id':self.id, 'email':self.email, 'date':self.registered_on, 'is_admin':self.admin}
+
     def encode_auth_token(self, user_id):
         """
         Generates the Auth Token
