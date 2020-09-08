@@ -8,6 +8,7 @@ from project.server.models import User
 
 auth_blueprint = Blueprint('auth', __name__)
 users_blueprint = Blueprint('users', __name__)
+home_blueprint = Blueprint('home', __name__)
 
 class RegisterAPI(MethodView):
     """
@@ -64,20 +65,31 @@ class IndexAPI(MethodView):
         users = [user.serialize for user in User.query.all()]
         return make_response(jsonify(users)), 202
 
+class HomeAPI(MethodView):
+
+    def get(self):
+        return make_response("CS 591 C2 Diagnostic API - Wail Rocks!!"), 202
+
 # define the API resources
 registration_view = RegisterAPI.as_view('register_api')
 index_view = IndexAPI.as_view('index_api')
+home_view= HomeAPI.as_view('home_api')
 
 # add Rules for API Endpoints
 auth_blueprint.add_url_rule(
     '/auth/register',
     view_func=registration_view,
     methods=['POST', 'GET']
-)
+)   
 
-# add Rules for API Endpoints
 users_blueprint.add_url_rule(
     '/users/index',
     view_func=index_view,
+    methods=['GET']
+)
+
+home_blueprint.add_url_rule(
+    '/',
+    view_func=home_view,
     methods=['GET']
 )
